@@ -20,11 +20,15 @@ import {
 export default function MainHome() {
   const [menuOpen, setMenuOpen] = useState(true);
 
-  // 🔥 تم را از localStorage بخوان و روی body اعمال کن
+  // 🔥 تم پیش‌فرض: طلایی نئونی
   useEffect(() => {
     const saved = localStorage.getItem("traposic-theme");
+
     if (saved) {
       document.body.className = saved;
+    } else {
+      document.body.className = "theme-neon-gold";
+      localStorage.setItem("traposic-theme", "theme-neon-gold");
     }
   }, []);
 
@@ -193,13 +197,13 @@ export default function MainHome() {
             alignItems: "center",
             gap: menuOpen ? "12px" : "0px",
             cursor: "pointer",
-            marginBottom: "15px", // فاصله بیشتر
+            marginBottom: "15px",
           }}
         >
           <FaSignOutAlt
             style={{
               fontSize: "22px",
-              color: "#ff4d4d", // ثابت
+              color: "#ff4d4d", // ثابت قرمز
               filter: "drop-shadow(0 0 8px #ff4d4d)",
             }}
           />
@@ -391,7 +395,8 @@ export default function MainHome() {
               height: "90px",
               borderRadius: "50%",
               margin: "0 auto",
-              background: "linear-gradient(135deg, var(--main-color), var(--accent-color))",
+              background:
+                "linear-gradient(135deg, var(--main-color), var(--accent-color))",
               boxShadow: "0 0 25px var(--main-color)",
               border: "3px solid rgba(255,255,255,0.3)",
             }}
@@ -423,7 +428,8 @@ export default function MainHome() {
               style={{
                 width: "60%",
                 height: "100%",
-                background: "linear-gradient(90deg, var(--main-color), var(--accent-color))",
+                background:
+                  "linear-gradient(90deg, var(--main-color), var(--accent-color))",
                 boxShadow: "0 0 15px var(--main-color)",
               }}
             />
