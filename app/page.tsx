@@ -38,7 +38,7 @@ export default function IntroPage() {
 
   const socials = [
     { icon: <FaInstagram />, url: "https://www.instagram.com/traposic" },
-    { icon: <FaTelegram />, url: "https://t.me/shayanizadi" },
+    { icon: <FaTelegram />, url: "https://t.me/Traposic" },
     { icon: <FaYoutube />, url: "https://youtube.com/@shayanizadi" },
     { icon: <FaGlobe />, url: "https://shh-dev.com" },
   ];

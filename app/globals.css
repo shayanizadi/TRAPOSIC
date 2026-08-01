@@ -11,6 +11,7 @@ html, body {
   font-family: sans-serif;
   background: #0b0010;
   color: #fff;
+  overflow-x: hidden; /* جلوگیری از اسکرول افقی */
 }
 
 * {
@@ -28,15 +29,158 @@ button {
   cursor: pointer;
 }
 
+/* اسکرول نئونی */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ff00cc;
+  background: var(--accent-color, #ff00cc);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-track {
   background: rgba(255,255,255,0.1);
+}
+
+/* ----------------------------- */
+/*        سیستم تم واقعی         */
+/* ----------------------------- */
+
+/* تم نئونی طلایی */
+.theme-neon-gold {
+  --main-color: #ffd700;
+  --accent-color: #ff00c8;
+  --bg-blur: rgba(255,255,255,0.08);
+  --panel-bg: rgba(255,255,255,0.08);
+  --panel-border: rgba(255,255,255,0.15);
+}
+
+/* تم بنفش کهکشانی */
+.theme-purple-galaxy {
+  --main-color: #a200ff;
+  --accent-color: #4b00ff;
+  --bg-blur: rgba(255,255,255,0.08);
+  --panel-bg: rgba(255,255,255,0.08);
+  --panel-border: rgba(255,255,255,0.15);
+}
+
+/* تم آبی تاریک */
+.theme-dark-blue {
+  --main-color: #0044ff;
+  --accent-color: #001133;
+  --bg-blur: rgba(255,255,255,0.08);
+  --panel-bg: rgba(255,255,255,0.08);
+  --panel-border: rgba(255,255,255,0.15);
+}
+
+/* تم‌های پولی */
+.theme-cyber-red {
+  --main-color: #ff0033;
+  --accent-color: #ff5500;
+  --panel-bg: rgba(255,255,255,0.08);
+  --panel-border: rgba(255,255,255,0.15);
+}
+
+.theme-emerald-glow {
+  --main-color: #00ff88;
+  --accent-color: #008844;
+  --panel-bg: rgba(255,255,255,0.08);
+  --panel-border: rgba(255,255,255,0.15);
+}
+
+.theme-ice-neon {
+  --main-color: #00eaff;
+  --accent-color: #0099ff;
+  --panel-bg: rgba(255,255,255,0.08);
+  --panel-border: rgba(255,255,255,0.15);
+}
+
+/* ----------------------------- */
+/*   کلاس‌های عمومی برای تم‌ها   */
+/* ----------------------------- */
+
+.panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(16px);
+  border-radius: 14px;
+}
+
+.text-main {
+  color: var(--main-color);
+}
+
+.text-accent {
+  color: var(--accent-color);
+}
+
+.glow-main {
+  text-shadow: 0 0 15px var(--main-color);
+}
+
+.glow-accent {
+  text-shadow: 0 0 15px var(--accent-color);
+}
+
+.border-main {
+  border-color: var(--main-color);
+}
+
+.border-accent {
+  border-color: var(--accent-color);
+}
+
+/* بک‌گراند طلایی */
+.theme-neon-gold {
+  --main-color: #ffd700;
+  --accent-color: #ff00c8;
+  --bg-gradient: radial-gradient(circle at center, rgba(255,215,0,0.25), rgba(20,10,0,1) 70%);
+  --bg-animation: conic-gradient(from 0deg, rgba(255,255,255,0.1), rgba(255,215,0,0.25), rgba(255,255,255,0.1));
+}
+
+/* بک‌گراند بنفش */
+.theme-purple-galaxy {
+  --main-color: #a200ff;
+  --accent-color: #4b00ff;
+  --bg-gradient: radial-gradient(circle at center, rgba(162,0,255,0.25), rgba(20,0,40,1) 70%);
+  --bg-animation: conic-gradient(from 0deg, rgba(255,255,255,0.1), rgba(162,0,255,0.25), rgba(255,255,255,0.1));
+}
+
+/* بک‌گراند آبی */
+.theme-dark-blue {
+  --main-color: #0044ff;
+  --accent-color: #001133;
+  --bg-gradient: radial-gradient(circle at center, rgba(0,68,255,0.25), rgba(0,0,20,1) 70%);
+  --bg-animation: conic-gradient(from 0deg, rgba(255,255,255,0.1), rgba(0,68,255,0.25), rgba(255,255,255,0.1));
+}
+
+/* بک‌گراند قرمز سایبری */
+.theme-cyber-red {
+  --main-color: #ff0033;
+  --accent-color: #ff5500;
+  --bg-gradient: radial-gradient(circle at center, rgba(255,0,51,0.25), rgba(20,0,0,1) 70%);
+  --bg-animation: conic-gradient(from 0deg, rgba(255,255,255,0.1), rgba(255,0,51,0.25), rgba(255,255,255,0.1));
+}
+
+/* بک‌گراند سبز زمردی */
+.theme-emerald-glow {
+  --main-color: #00ff88;
+  --accent-color: #008844;
+  --bg-gradient: radial-gradient(circle at center, rgba(0,255,136,0.25), rgba(0,20,10,1) 70%);
+  --bg-animation: conic-gradient(from 0deg, rgba(255,255,255,0.1), rgba(0,255,136,0.25), rgba(255,255,255,0.1));
+}
+
+/* بک‌گراند آبی یخی */
+.theme-ice-neon {
+  --main-color: #00eaff;
+  --accent-color: #0099ff;
+  --bg-gradient: radial-gradient(circle at center, rgba(0,234,255,0.25), rgba(0,10,20,1) 70%);
+  --bg-animation: conic-gradient(from 0deg, rgba(255,255,255,0.1), rgba(0,234,255,0.25), rgba(255,255,255,0.1));
+}
+
+/* انیمیشن چرخش */
+@keyframes themeSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

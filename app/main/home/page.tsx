@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FaBars,
   FaHome,
@@ -9,28 +9,36 @@ import {
   FaStar,
   FaCog,
   FaStore,
-  FaInfoCircle,
   FaTicketAlt,
   FaUsers,
   FaCompass,
   FaListUl,
   FaSignOutAlt,
+  FaInfoCircle,
 } from "react-icons/fa";
 
 export default function MainHome() {
   const [menuOpen, setMenuOpen] = useState(true);
 
+  // 🔥 تم را از localStorage بخوان و روی body اعمال کن
+  useEffect(() => {
+    const saved = localStorage.getItem("traposic-theme");
+    if (saved) {
+      document.body.className = saved;
+    }
+  }, []);
+
   const menuItems = [
-    { icon: FaHome, label: "Home" },
-    { icon: FaMusic, label: "Music" },
-    { icon: FaStar, label: "Stars" },
-    { icon: FaUsers, label: "Community" },
-    { icon: FaCompass, label: "Explore" },
-    { icon: FaListUl, label: "Playlists" },
-    { icon: FaUser, label: "Profile" },
-    { icon: FaCog, label: "Settings" },
-    { icon: FaStore, label: "Store" },
-    { icon: FaTicketAlt, label: "Tickets" },
+    { icon: FaHome, label: "Home", link: "/main/home" },
+    { icon: FaMusic, label: "Music", link: "/main/music" },
+    { icon: FaStar, label: "Stars", link: "/main/stars" },
+    { icon: FaUsers, label: "Community", link: "/main/community" },
+    { icon: FaCompass, label: "Explore", link: "/main/explore" },
+    { icon: FaListUl, label: "Playlists", link: "/main/playlists" },
+    { icon: FaUser, label: "Profile", link: "/main/profile" },
+    { icon: FaCog, label: "Settings", link: "/settings" },
+    { icon: FaStore, label: "Store", link: "/main/store" },
+    { icon: FaTicketAlt, label: "Tickets", link: "/main/tickets" },
   ];
 
   return (
@@ -39,43 +47,39 @@ export default function MainHome() {
         width: "100%",
         minHeight: "100vh",
         display: "flex",
-        background: "#0b0010",
         position: "relative",
         overflow: "hidden",
+        color: "#fff",
       }}
     >
-      {/* 🔥 پس‌زمینه طلایی */}
+      {/* 🔥 بک‌گراند تم */}
       <div
         style={{
           position: "absolute",
-          width: "180%",
-          height: "180%",
-          top: "-40%",
-          left: "-40%",
-          background:
-            "radial-gradient(circle, rgba(255,215,0,0.35), rgba(0,0,0,0.9) 70%)",
-          filter: "blur(120px)",
-          animation: "goldWave 12s ease-in-out infinite",
-          opacity: 0.55,
+          width: "200%",
+          height: "200%",
+          top: "-50%",
+          left: "-50%",
+          background: "var(--bg-gradient)",
           zIndex: 0,
         }}
       />
 
-      <style>
-        {`
-          @keyframes goldWave {
-            0% { transform: scale(1) rotate(0deg); opacity: 0.55; }
-            50% { transform: scale(1.15) rotate(180deg); opacity: 0.75; }
-            100% { transform: scale(1) rotate(360deg); opacity: 0.55; }
-          }
-
-          @keyframes buttonGlow {
-            0% { box-shadow: 0 0 15px #ffd700; }
-            50% { box-shadow: 0 0 30px #ffea80; }
-            100% { box-shadow: 0 0 15px #ffd700; }
-          }
-        `}
-      </style>
+      {/* 🔥 انیمیشن تم */}
+      <div
+        style={{
+          position: "absolute",
+          width: "200%",
+          height: "200%",
+          top: "-50%",
+          left: "-50%",
+          background: "var(--bg-animation)",
+          animation: "themeSpin 12s linear infinite",
+          filter: "blur(120px)",
+          opacity: 0.45,
+          zIndex: 0,
+        }}
+      />
 
       {/* 🟪 Sidebar چپ */}
       <div
@@ -110,20 +114,20 @@ export default function MainHome() {
             alignItems: "center",
             cursor: "pointer",
             marginBottom: "15px",
-            animation: "buttonGlow 3s ease-in-out infinite",
             border: "1px solid rgba(255,255,255,0.25)",
+            boxShadow: "0 0 12px var(--main-color)",
           }}
         >
           <FaBars
             style={{
               fontSize: "22px",
               color: "#fff",
-              filter: "drop-shadow(0 0 8px #ffd700)",
+              filter: "drop-shadow(0 0 8px var(--main-color))",
             }}
           />
         </div>
 
-        {/* آیتم‌های منو بالا */}
+        {/* آیتم‌های منو */}
         <div
           style={{
             display: "flex",
@@ -136,12 +140,14 @@ export default function MainHome() {
           {menuItems.map((item, i) => (
             <div
               key={i}
+              onClick={() => (window.location.href = item.link)}
               style={{
                 display: "flex",
                 flexDirection: menuOpen ? "row" : "column",
                 alignItems: "center",
                 gap: menuOpen ? "12px" : "0px",
                 cursor: "pointer",
+                padding: "8px 0",
               }}
             >
               <item.icon
@@ -149,7 +155,7 @@ export default function MainHome() {
                   fontSize: "22px",
                   color: "#fff",
                   opacity: 0.9,
-                  filter: "drop-shadow(0 0 8px #ffd700)",
+                  filter: "drop-shadow(0 0 8px var(--main-color))",
                 }}
               />
 
@@ -187,13 +193,13 @@ export default function MainHome() {
             alignItems: "center",
             gap: menuOpen ? "12px" : "0px",
             cursor: "pointer",
-            marginBottom: "8px",
+            marginBottom: "15px", // فاصله بیشتر
           }}
         >
           <FaSignOutAlt
             style={{
               fontSize: "22px",
-              color: "#ff4d4d",
+              color: "#ff4d4d", // ثابت
               filter: "drop-shadow(0 0 8px #ff4d4d)",
             }}
           />
@@ -213,12 +219,14 @@ export default function MainHome() {
 
         {/* About Us */}
         <div
+          onClick={() => alert("About Us")}
           style={{
             display: "flex",
             flexDirection: menuOpen ? "row" : "column",
             alignItems: "center",
             gap: menuOpen ? "12px" : "0px",
             cursor: "pointer",
+            marginBottom: "10px",
           }}
         >
           <FaInfoCircle
@@ -226,7 +234,7 @@ export default function MainHome() {
               fontSize: "22px",
               color: "#fff",
               opacity: 0.9,
-              filter: "drop-shadow(0 0 8px #ffd700)",
+              filter: "drop-shadow(0 0 8px var(--main-color))",
             }}
           />
 
@@ -264,7 +272,7 @@ export default function MainHome() {
             borderRadius: "20px",
             backdropFilter: "blur(20px)",
             border: "1px solid rgba(255,255,255,0.15)",
-            boxShadow: "0 0 35px rgba(255,215,0,0.3)",
+            boxShadow: "0 0 35px var(--main-color)",
             marginBottom: "25px",
             overflow: "hidden",
             position: "relative",
@@ -296,7 +304,7 @@ export default function MainHome() {
               left: "18px",
               fontSize: "24px",
               fontWeight: "700",
-              textShadow: "0 0 15px #ffd700",
+              textShadow: "0 0 15px var(--main-color)",
             }}
           >
             New Event
@@ -318,7 +326,7 @@ export default function MainHome() {
                 style={{
                   fontSize: "26px",
                   marginBottom: "15px",
-                  textShadow: "0 0 18px #ffd700",
+                  textShadow: "0 0 18px var(--main-color)",
                 }}
               >
                 {section}
@@ -340,7 +348,7 @@ export default function MainHome() {
                       borderRadius: "16px",
                       backdropFilter: "blur(15px)",
                       border: "1px solid rgba(255,255,255,0.15)",
-                      boxShadow: "0 0 22px rgba(255,215,0,0.25)",
+                      boxShadow: "0 0 22px var(--main-color)",
                     }}
                   />
                 ))}
@@ -350,7 +358,7 @@ export default function MainHome() {
         </div>
       </div>
 
-      {/* 🟥 Sidebar راست */}
+      {/* 🟥 Sidebar راست — پروفایل + XP + کامیونیتی */}
       <div
         style={{
           width: "270px",
@@ -363,12 +371,83 @@ export default function MainHome() {
           borderRadius: "20px 0 0 20px",
         }}
       >
+        {/* پروفایل نئونی */}
+        <div
+          style={{
+            width: "100%",
+            background: "rgba(255,255,255,0.08)",
+            borderRadius: "18px",
+            padding: "20px",
+            backdropFilter: "blur(15px)",
+            border: "1px solid rgba(255,255,255,0.15)",
+            boxShadow: "0 0 25px var(--main-color)",
+            marginBottom: "20px",
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              width: "90px",
+              height: "90px",
+              borderRadius: "50%",
+              margin: "0 auto",
+              background: "linear-gradient(135deg, var(--main-color), var(--accent-color))",
+              boxShadow: "0 0 25px var(--main-color)",
+              border: "3px solid rgba(255,255,255,0.3)",
+            }}
+          />
+
+          <h3
+            style={{
+              color: "#fff",
+              marginTop: "12px",
+              fontSize: "20px",
+              textShadow: "0 0 10px var(--main-color)",
+            }}
+          >
+            Shayan
+          </h3>
+
+          {/* XP BAR */}
+          <div
+            style={{
+              width: "100%",
+              height: "12px",
+              background: "rgba(255,255,255,0.1)",
+              borderRadius: "10px",
+              marginTop: "15px",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                width: "60%",
+                height: "100%",
+                background: "linear-gradient(90deg, var(--main-color), var(--accent-color))",
+                boxShadow: "0 0 15px var(--main-color)",
+              }}
+            />
+          </div>
+
+          <p
+            style={{
+              color: "#fff",
+              opacity: 0.8,
+              marginTop: "8px",
+              fontSize: "14px",
+            }}
+          >
+            XP: 1200 / 2000
+          </p>
+        </div>
+
+        {/* کامیونیتی */}
         <h2
           style={{
             color: "#fff",
             fontSize: "24px",
             marginBottom: "20px",
-            textShadow: "0 0 12px #ffd700",
+            textShadow: "0 0 12px var(--main-color)",
           }}
         >
           Community
@@ -384,7 +463,7 @@ export default function MainHome() {
               borderRadius: "16px",
               backdropFilter: "blur(15px)",
               border: "1px solid rgba(255,255,255,0.15)",
-              boxShadow: "0 0 22px rgba(255,215,0,0.25)",
+              boxShadow: "0 0 22px var(--main-color)",
               marginBottom: "15px",
             }}
           />
