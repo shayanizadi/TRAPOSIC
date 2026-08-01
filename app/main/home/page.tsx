@@ -130,7 +130,6 @@ export default function MainHome() {
             flexDirection: "column",
             gap: "12px",
             alignItems: menuOpen ? "flex-start" : "center",
-            paddingLeft: menuOpen ? "5px" : "0px",
             transition: "0.25s",
           }}
         >
@@ -139,6 +138,7 @@ export default function MainHome() {
               key={i}
               style={{
                 display: "flex",
+                flexDirection: menuOpen ? "row" : "column",
                 alignItems: "center",
                 gap: menuOpen ? "12px" : "0px",
                 cursor: "pointer",
@@ -183,11 +183,11 @@ export default function MainHome() {
           onClick={() => alert("Logout clicked")}
           style={{
             display: "flex",
+            flexDirection: menuOpen ? "row" : "column",
             alignItems: "center",
             gap: menuOpen ? "12px" : "0px",
             cursor: "pointer",
-            paddingLeft: menuOpen ? "5px" : "0px",
-            marginBottom: "6px",
+            marginBottom: "8px",
           }}
         >
           <FaSignOutAlt
@@ -215,10 +215,10 @@ export default function MainHome() {
         <div
           style={{
             display: "flex",
+            flexDirection: menuOpen ? "row" : "column",
             alignItems: "center",
             gap: menuOpen ? "12px" : "0px",
             cursor: "pointer",
-            paddingLeft: menuOpen ? "5px" : "0px",
           }}
         >
           <FaInfoCircle
