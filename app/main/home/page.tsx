@@ -14,6 +14,7 @@ import {
   FaUsers,
   FaCompass,
   FaListUl,
+  FaSignOutAlt,
 } from "react-icons/fa";
 
 export default function MainHome() {
@@ -22,17 +23,15 @@ export default function MainHome() {
   const menuItems = [
     { icon: FaHome, label: "Home" },
     { icon: FaMusic, label: "Music" },
-    { icon: FaStar, label: "Stars" }, // ⭐ بخش هنرمندان و افراد محبوب
-    { icon: FaUsers, label: "Community" }, // کامیونیتی مثل Reddit
-    { icon: FaCompass, label: "Explore" }, // اکسپلور
-    { icon: FaListUl, label: "Playlists" }, // پلی لیست‌ها
+    { icon: FaStar, label: "Stars" },
+    { icon: FaUsers, label: "Community" },
+    { icon: FaCompass, label: "Explore" },
+    { icon: FaListUl, label: "Playlists" },
     { icon: FaUser, label: "Profile" },
     { icon: FaCog, label: "Settings" },
     { icon: FaStore, label: "Store" },
     { icon: FaTicketAlt, label: "Tickets" },
   ];
-
-  const bottomItems = [{ icon: FaInfoCircle, label: "About Us" }];
 
   return (
     <div
@@ -45,7 +44,7 @@ export default function MainHome() {
         overflow: "hidden",
       }}
     >
-      {/* 🔥 انیمیشن طلایی پشت صفحه */}
+      {/* 🔥 پس‌زمینه طلایی */}
       <div
         style={{
           position: "absolute",
@@ -70,35 +69,24 @@ export default function MainHome() {
             100% { transform: scale(1) rotate(360deg); opacity: 0.55; }
           }
 
-          @keyframes neonPulse {
-            0% { opacity: 0.9; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-            100% { opacity: 0.9; transform: scale(1); }
-          }
-
           @keyframes buttonGlow {
             0% { box-shadow: 0 0 15px #ffd700; }
-            50% { box-shadow: 0 0 35px #ffea80; }
+            50% { box-shadow: 0 0 30px #ffea80; }
             100% { box-shadow: 0 0 15px #ffd700; }
-          }
-
-          @keyframes spinBG {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
           }
         `}
       </style>
 
-      {/* 🟪 Sidebar چپ — ثابت و بدون فاصله اضافی */}
+      {/* 🟪 Sidebar چپ */}
       <div
         style={{
-          width: menuOpen ? "240px" : "90px",
+          width: menuOpen ? "220px" : "75px",
           height: "100vh",
           background: "rgba(255,255,255,0.05)",
           backdropFilter: "blur(20px)",
           borderRight: "1px solid rgba(255,255,255,0.1)",
-          padding: "25px 20px",
-          transition: "0.3s",
+          padding: menuOpen ? "20px 15px" : "15px 10px",
+          transition: "0.25s",
           zIndex: 5,
           overflow: "hidden",
           position: "fixed",
@@ -106,61 +94,44 @@ export default function MainHome() {
           top: 0,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
         }}
       >
         {/* دکمه باز/بسته شدن */}
         <div
           onClick={() => setMenuOpen(!menuOpen)}
           style={{
-            width: "55px",
-            height: "55px",
-            borderRadius: "14px",
+            width: "45px",
+            height: "45px",
+            borderRadius: "12px",
             background: "rgba(255,255,255,0.12)",
             backdropFilter: "blur(12px)",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             cursor: "pointer",
-            marginBottom: "20px",
+            marginBottom: "15px",
             animation: "buttonGlow 3s ease-in-out infinite",
             border: "1px solid rgba(255,255,255,0.25)",
-            position: "relative",
-            overflow: "hidden",
           }}
         >
-          <div
-            style={{
-              position: "absolute",
-              width: "140%",
-              height: "140%",
-              background:
-                "conic-gradient(from 0deg, rgba(255,215,0,0.4), rgba(255,255,255,0.1), rgba(255,215,0,0.4))",
-              animation: "spinBG 6s linear infinite",
-              filter: "blur(25px)",
-              opacity: 0.55,
-            }}
-          />
-
           <FaBars
             style={{
-              fontSize: "28px",
+              fontSize: "22px",
               color: "#fff",
-              zIndex: 2,
-              filter: "drop-shadow(0 0 10px #ffd700)",
+              filter: "drop-shadow(0 0 8px #ffd700)",
             }}
           />
         </div>
 
-        {/* آیتم‌های منو */}
+        {/* آیتم‌های منو بالا */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "18px",
+            gap: "12px",
             alignItems: menuOpen ? "flex-start" : "center",
-            paddingLeft: menuOpen ? "10px" : "0px",
-            transition: "0.3s",
+            paddingLeft: menuOpen ? "5px" : "0px",
+            transition: "0.25s",
           }}
         >
           {menuItems.map((item, i) => (
@@ -169,17 +140,16 @@ export default function MainHome() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "15px",
+                gap: menuOpen ? "12px" : "0px",
                 cursor: "pointer",
               }}
             >
               <item.icon
                 style={{
-                  fontSize: "26px",
+                  fontSize: "22px",
                   color: "#fff",
                   opacity: 0.9,
-                  filter: "drop-shadow(0 0 10px #ffd700)",
-                  animation: "neonPulse 3s ease-in-out infinite",
+                  filter: "drop-shadow(0 0 8px #ffd700)",
                 }}
               />
 
@@ -187,7 +157,7 @@ export default function MainHome() {
                 <span
                   style={{
                     color: "#fff",
-                    fontSize: "18px",
+                    fontSize: "16px",
                     opacity: 0.85,
                   }}
                 >
@@ -203,54 +173,74 @@ export default function MainHome() {
           style={{
             width: "100%",
             height: "1px",
-            background: "rgba(255,255,255,0.2)",
+            background: "rgba(255,255,255,0.25)",
             margin: "10px 0",
           }}
         />
 
-        {/* آیتم پایین */}
+        {/* Logout */}
+        <div
+          onClick={() => alert("Logout clicked")}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: menuOpen ? "12px" : "0px",
+            cursor: "pointer",
+            paddingLeft: menuOpen ? "5px" : "0px",
+            marginBottom: "6px",
+          }}
+        >
+          <FaSignOutAlt
+            style={{
+              fontSize: "22px",
+              color: "#ff4d4d",
+              filter: "drop-shadow(0 0 8px #ff4d4d)",
+            }}
+          />
+
+          {menuOpen && (
+            <span
+              style={{
+                color: "#ff4d4d",
+                fontSize: "16px",
+                fontWeight: "600",
+              }}
+            >
+              Logout
+            </span>
+          )}
+        </div>
+
+        {/* About Us */}
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            gap: "15px",
-            alignItems: menuOpen ? "flex-start" : "center",
-            paddingLeft: menuOpen ? "10px" : "0px",
+            alignItems: "center",
+            gap: menuOpen ? "12px" : "0px",
+            cursor: "pointer",
+            paddingLeft: menuOpen ? "5px" : "0px",
           }}
         >
-          {bottomItems.map((item, i) => (
-            <div
-              key={i}
+          <FaInfoCircle
+            style={{
+              fontSize: "22px",
+              color: "#fff",
+              opacity: 0.9,
+              filter: "drop-shadow(0 0 8px #ffd700)",
+            }}
+          />
+
+          {menuOpen && (
+            <span
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "15px",
-                cursor: "pointer",
+                color: "#fff",
+                fontSize: "16px",
+                opacity: 0.85,
               }}
             >
-              <item.icon
-                style={{
-                  fontSize: "26px",
-                  color: "#fff",
-                  opacity: 0.9,
-                  filter: "drop-shadow(0 0 10px #ffd700)",
-                  animation: "neonPulse 3s ease-in-out infinite",
-                }}
-              />
-
-              {menuOpen && (
-                <span
-                  style={{
-                    color: "#fff",
-                    fontSize: "18px",
-                    opacity: 0.85,
-                  }}
-                >
-                  {item.label}
-                </span>
-              )}
-            </div>
-          ))}
+              About Us
+            </span>
+          )}
         </div>
       </div>
 
@@ -258,24 +248,24 @@ export default function MainHome() {
       <div
         style={{
           flex: 1,
-          padding: "40px",
+          padding: "30px",
           zIndex: 2,
           color: "#fff",
-          marginLeft: menuOpen ? "240px" : "90px",
-          transition: "0.3s",
+          marginLeft: menuOpen ? "220px" : "75px",
+          transition: "0.25s",
         }}
       >
         {/* چنل شیشه‌ای ایونت */}
         <div
           style={{
             width: "100%",
-            height: "260px",
+            height: "230px",
             background: "rgba(255,255,255,0.08)",
             borderRadius: "20px",
             backdropFilter: "blur(20px)",
             border: "1px solid rgba(255,255,255,0.15)",
             boxShadow: "0 0 35px rgba(255,215,0,0.3)",
-            marginBottom: "30px",
+            marginBottom: "25px",
             overflow: "hidden",
             position: "relative",
           }}
@@ -302,9 +292,9 @@ export default function MainHome() {
           <div
             style={{
               position: "absolute",
-              bottom: "20px",
-              left: "20px",
-              fontSize: "26px",
+              bottom: "18px",
+              left: "18px",
+              fontSize: "24px",
               fontWeight: "700",
               textShadow: "0 0 15px #ffd700",
             }}
@@ -313,8 +303,8 @@ export default function MainHome() {
           </div>
         </div>
 
-        {/* بخش‌بندی آهنگ‌ها — تا آخر صفحه */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
+        {/* بخش‌بندی آهنگ‌ها */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "30px" }}>
           {[
             "Trending Songs",
             "New Songs",
@@ -326,9 +316,9 @@ export default function MainHome() {
             <div key={i}>
               <h2
                 style={{
-                  fontSize: "32px",
-                  marginBottom: "20px",
-                  textShadow: "0 0 20px #ffd700",
+                  fontSize: "26px",
+                  marginBottom: "15px",
+                  textShadow: "0 0 18px #ffd700",
                 }}
               >
                 {section}
@@ -337,20 +327,20 @@ export default function MainHome() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-                  gap: "20px",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
+                  gap: "16px",
                 }}
               >
                 {[1, 2, 3, 4, 5, 6].map((box) => (
                   <div
                     key={box}
                     style={{
-                      height: "180px",
+                      height: "160px",
                       background: "rgba(255,255,255,0.08)",
-                      borderRadius: "18px",
+                      borderRadius: "16px",
                       backdropFilter: "blur(15px)",
                       border: "1px solid rgba(255,255,255,0.15)",
-                      boxShadow: "0 0 25px rgba(255,215,0,0.25)",
+                      boxShadow: "0 0 22px rgba(255,215,0,0.25)",
                     }}
                   />
                 ))}
@@ -360,15 +350,15 @@ export default function MainHome() {
         </div>
       </div>
 
-      {/* 🟥 Sidebar راست — گوشه‌ها گرد شد */}
+      {/* 🟥 Sidebar راست */}
       <div
         style={{
-          width: "300px",
+          width: "270px",
           height: "100vh",
           background: "rgba(255,255,255,0.05)",
           backdropFilter: "blur(20px)",
           borderLeft: "1px solid rgba(255,255,255,0.1)",
-          padding: "30px 20px",
+          padding: "25px 18px",
           zIndex: 2,
           borderRadius: "20px 0 0 20px",
         }}
@@ -376,8 +366,8 @@ export default function MainHome() {
         <h2
           style={{
             color: "#fff",
-            fontSize: "28px",
-            marginBottom: "30px",
+            fontSize: "24px",
+            marginBottom: "20px",
             textShadow: "0 0 12px #ffd700",
           }}
         >
@@ -389,13 +379,13 @@ export default function MainHome() {
             key={i}
             style={{
               width: "100%",
-              height: "120px",
+              height: "110px",
               background: "rgba(255,255,255,0.08)",
-              borderRadius: "18px",
+              borderRadius: "16px",
               backdropFilter: "blur(15px)",
               border: "1px solid rgba(255,255,255,0.15)",
-              boxShadow: "0 0 25px rgba(255,215,0,0.25)",
-              marginBottom: "20px",
+              boxShadow: "0 0 22px rgba(255,215,0,0.25)",
+              marginBottom: "15px",
             }}
           />
         ))}
