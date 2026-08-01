@@ -1,3 +1,6 @@
+// app/components/Footer.tsx
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer
@@ -5,36 +8,25 @@ export default function Footer() {
         width: "100%",
         padding: "16px",
         textAlign: "center",
-        marginTop: "40px",
-
-        backdropFilter: "blur(20px)",
         background: "rgba(255,255,255,0.06)",
+        backdropFilter: "blur(20px)",
         borderTop: "1px solid rgba(255,255,255,0.15)",
-        boxShadow: "0 0 20px rgba(255,0,150,0.25)",
+        color: "#fff",
+        fontSize: "16px",
+        boxShadow: "0 0 25px rgba(255,0,200,0.25)",
       }}
     >
-      <p
+      © 2026 TRAPOSIC — Powered by{" "}
+      <Link
+        href="https://shh-dev.ir"
         style={{
-          color: "#ffffff",
-          opacity: 0.85,
-          fontSize: "16px",
-          fontFamily: "system-ui, sans-serif",
+          color: "#ff00cc",
+          fontWeight: "700",
+          textShadow: "0 0 10px #ff00cc",
         }}
       >
-        © 2026 TRAPOSIC — Powered by{" "}
-        <a
-          href="https://shh-dev.ir"
-          target="_blank"
-          style={{
-            color: "#ff00cc",
-            fontWeight: "700",
-            textDecoration: "none",
-            textShadow: "0 0 10px #ff00cc",
-          }}
-        >
-          SHH‑DEV
-        </a>
-      </p>
+        SHH‑DEV
+      </Link>
     </footer>
   );
 }

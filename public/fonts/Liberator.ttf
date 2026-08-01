@@ -1,0 +1,6 @@
+@font-face {
+  font-family: "Liberator";
+  src: url("/fonts/Liberator.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

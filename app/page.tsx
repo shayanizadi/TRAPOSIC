@@ -2,23 +2,20 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { FaInstagram, FaTelegram, FaYoutube, FaGlobe } from "react-icons/fa";
 
 export default function IntroPage() {
   const slogans = [
-    "A new generation of music platforms",
-    "Damn… this place has everything",
-    "God… I love listening to music on TRAPOSIC",
-    "Therapy, but with music",
+    "اولین پلتفرم ایرانی در حوزه موسیقی",
   ];
 
   const [currentText, setCurrentText] = useState("");
+  const [index, setIndex] = useState(0);
 
-  // Typing Animation (clean, no bugs)
+  // Typing Animation (sequential, بدون رندوم)
   useEffect(() => {
-    let sloganIndex = Math.floor(Math.random() * slogans.length);
-
-    const typeSlogan = () => {
-      const slogan = slogans[sloganIndex];
+    const type = () => {
+      const slogan = slogans[index];
       let i = 0;
 
       const typing = setInterval(() => {
@@ -29,15 +26,90 @@ export default function IntroPage() {
           clearInterval(typing);
 
           setTimeout(() => {
-            sloganIndex = Math.floor(Math.random() * slogans.length);
-            typeSlogan();
-          }, Math.random() * 2000 + 2000);
+            setIndex((prev) => (prev + 1) % slogans.length);
+            type();
+          }, 3500);
         }
       }, 65);
     };
 
-    typeSlogan();
-  }, []);
+    type();
+  }, [index]); // وابسته به index تا پشت‌سرهم بیاد
+
+  const socials = [
+    { icon: <FaInstagram />, url: "https://www.instagram.com/traposic" },
+    { icon: <FaTelegram />, url: "https://t.me/shayanizadi" },
+    { icon: <FaYoutube />, url: "https://youtube.com/@shayanizadi" },
+    { icon: <FaGlobe />, url: "https://shh-dev.com" },
+  ];
+
+  // نت‌ها: پخش در کل صفحه، هرکدوم جای خودش
+  const notes = [
+    {
+      char: "♪",
+      color: "#00ff88",
+      size: 34,
+      top: "10%",
+      left: "8%",
+      anim: "noteFloat0",
+    },
+    {
+      char: "♫",
+      color: "#ff00cc",
+      size: 40,
+      top: "18%",
+      left: "80%",
+      anim: "noteFloat1",
+    },
+    {
+      char: "♪",
+      color: "#7b2cff",
+      size: 32,
+      top: "30%",
+      left: "15%",
+      anim: "noteFloat2",
+    },
+    {
+      char: "♫",
+      color: "#00eaff",
+      size: 38,
+      top: "40%",
+      left: "70%",
+      anim: "noteFloat3",
+    },
+    {
+      char: "♪",
+      color: "#ff8800",
+      size: 36,
+      top: "55%",
+      left: "5%",
+      anim: "noteFloat4",
+    },
+    {
+      char: "♫",
+      color: "#ff0055",
+      size: 42,
+      top: "65%",
+      left: "85%",
+      anim: "noteFloat5",
+    },
+    {
+      char: "♪",
+      color: "#00ffcc",
+      size: 30,
+      top: "75%",
+      left: "25%",
+      anim: "noteFloat6",
+    },
+    {
+      char: "♫",
+      color: "#cc00ff",
+      size: 44,
+      top: "82%",
+      left: "60%",
+      anim: "noteFloat7",
+    },
+  ];
 
   return (
     <div
@@ -50,7 +122,6 @@ export default function IntroPage() {
         justifyContent: "center",
         alignItems: "center",
 
-        /* 3D Neon Purple/Pink Background */
         background: `
           radial-gradient(circle at center,
           rgba(123, 44, 255, 0.25),
@@ -60,7 +131,89 @@ export default function IntroPage() {
         overflow: "hidden",
       }}
     >
-      {/* 3D Neon Glow Layer */}
+      {/* نت‌های نئونی پخش در کل صفحه */}
+      {notes.map((n, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            fontSize: `${n.size}px`,
+            color: n.color,
+            top: n.top,
+            left: n.left,
+            animation: `${n.anim} 5s ease-in-out infinite`,
+            opacity: 0.9,
+            textShadow: `0 0 15px ${n.color}`,
+            zIndex: 1,
+          }}
+        >
+          {n.char}
+        </div>
+      ))}
+
+      {/* انیمیشن نت‌ها (هرکدوم حرکت متفاوت) */}
+      <style>
+        {`
+          @keyframes noteFloat0 {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            25% { transform: translate(10px, -20px) rotate(8deg); }
+            50% { transform: translate(-5px, 10px) rotate(-6deg); }
+            75% { transform: translate(8px, -15px) rotate(10deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+          }
+          @keyframes noteFloat1 {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            25% { transform: translate(-15px, -25px) rotate(-10deg); }
+            50% { transform: translate(5px, 15px) rotate(6deg); }
+            75% { transform: translate(-10px, -10px) rotate(-12deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+          }
+          @keyframes noteFloat2 {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            25% { transform: translate(12px, -18px) rotate(5deg); }
+            50% { transform: translate(-8px, 12px) rotate(-8deg); }
+            75% { transform: translate(6px, -10px) rotate(9deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+          }
+          @keyframes noteFloat3 {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            25% { transform: translate(-10px, -22px) rotate(-7deg); }
+            50% { transform: translate(10px, 18px) rotate(11deg); }
+            75% { transform: translate(-6px, -12px) rotate(-9deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+          }
+          @keyframes noteFloat4 {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            25% { transform: translate(8px, -16px) rotate(6deg); }
+            50% { transform: translate(-12px, 14px) rotate(-10deg); }
+            75% { transform: translate(5px, -8px) rotate(7deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+          }
+          @keyframes noteFloat5 {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            25% { transform: translate(-18px, -20px) rotate(-12deg); }
+            50% { transform: translate(12px, 16px) rotate(14deg); }
+            75% { transform: translate(-8px, -14px) rotate(-9deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+          }
+          @keyframes noteFloat6 {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            25% { transform: translate(14px, -12px) rotate(4deg); }
+            50% { transform: translate(-10px, 18px) rotate(-11deg); }
+            75% { transform: translate(6px, -9px) rotate(8deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+          }
+          @keyframes noteFloat7 {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            25% { transform: translate(-12px, -18px) rotate(-5deg); }
+            50% { transform: translate(14px, 20px) rotate(13deg); }
+            75% { transform: translate(-7px, -11px) rotate(-8deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+          }
+        `}
+      </style>
+
+      {/* Neon Glow */}
       <div
         style={{
           position: "absolute",
@@ -77,7 +230,7 @@ export default function IntroPage() {
         }}
       />
 
-      {/* Glassmorphism Container */}
+      {/* Glass Container */}
       <div
         style={{
           backdropFilter: "blur(25px)",
@@ -88,9 +241,10 @@ export default function IntroPage() {
           boxShadow: "0 0 60px rgba(255,0,150,0.25)",
           textAlign: "center",
           zIndex: 2,
+          position: "relative",
         }}
       >
-        {/* TRAPOSIC Title */}
+        {/* Title */}
         <h1
           style={{
             fontSize: "64px",
@@ -170,9 +324,78 @@ export default function IntroPage() {
             </button>
           </Link>
         </div>
+
+        {/* MUSIC WAVE — داخل کادر، سبز نئونی */}
+        <div
+          style={{
+            marginTop: "45px",
+            marginBottom: "35px",
+            display: "flex",
+            justifyContent: "center",
+            gap: "10px",
+          }}
+        >
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((bar, i) => (
+            <div
+              key={i}
+              style={{
+                width: "8px",
+                height: "55px",
+                background: "linear-gradient(180deg, #00ff88, #00cc66)",
+                borderRadius: "10px",
+                animation: `wave 1.2s ease-in-out ${i * 0.12}s infinite`,
+                boxShadow: "0 0 18px #00ff88",
+              }}
+            />
+          ))}
+        </div>
+
+        <style>{`
+          @keyframes wave {
+            0% { transform: scaleY(0.3); }
+            50% { transform: scaleY(1.3); }
+            100% { transform: scaleY(0.3); }
+          }
+        `}</style>
+
+        {/* Social Media */}
+        <div
+          style={{
+            display: "flex",
+            gap: "25px",
+            justifyContent: "center",
+          }}
+        >
+          {socials.map((s, i) => (
+            <a
+              key={i}
+              href={s.url}
+              target="_blank"
+              style={{
+                fontSize: "32px",
+                color: "#ff99ff",
+                padding: "14px",
+                borderRadius: "16px",
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.15)",
+                backdropFilter: "blur(12px)",
+                boxShadow: "0 0 22px rgba(255,0,200,0.25)",
+                transition: "0.3s",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "#ffffff")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "#ff99ff")
+              }
+            >
+              {s.icon}
+            </a>
+          ))}
+        </div>
       </div>
 
-      {/* Animations */}
+      {/* Animations عمومی */}
       <style>{`
         @keyframes pulse {
           0% { transform: translate(-50%, -50%) scale(1); }
